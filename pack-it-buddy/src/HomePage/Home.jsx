@@ -25,7 +25,7 @@ const Home = () => {
             Local & Long Distance Moving
           </h1>
           <p className='text-white py-10 text-center text-lg'>
-            Professional remoddval services from packing to unpacking
+            Professional removal services from packing to unpacking
           </p>
           <div className='text-center text-white'>
             <button className='px-4 py-2 bg-black bg-opacity-50 text-white rounded-md hover:bg-opacity-75'>
