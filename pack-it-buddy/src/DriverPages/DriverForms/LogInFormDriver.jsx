@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth } from '../../../firebase'; // Import Firebase auth
 import backtruck from '../DriverAssets/truck4.jpg';
 import { FaArrowLeft } from "react-icons/fa";
-import { Link, useNavigate } from 'react-router-dom';
 
 const LogInFormDriver = () => {
   const [formData, setFormData] = useState({
     email: '',
     password: ''
   });
-  
+
   const [errors, setErrors] = useState({});
   const navigate = useNavigate(); // Use the useNavigate hook for navigation
 
@@ -31,9 +32,16 @@ const LogInFormDriver = () => {
     e.preventDefault();
     const formErrors = validateForm();
     if (Object.keys(formErrors).length === 0) {
-      console.log('Form data:', formData);
-      // Submit form data
-      navigate('/DriverHome'); // Redirect to DriverHome after successful submission
+      auth.signInWithEmailAndPassword(formData.email, formData.password)
+        .then((userCredential) => {
+          // Successfully signed in
+          console.log('User signed in:', userCredential.user);
+          navigate('/DriverHome'); // Redirect to DriverHome after successful login
+        })
+        .catch((error) => {
+          console.error("Error signing in: ", error);
+          alert("Invalid email or password. Please try again.");
+        });
     } else {
       setErrors(formErrors);
     }
@@ -41,13 +49,12 @@ const LogInFormDriver = () => {
 
   return (
     <div className="flex h-screen">
-          <div className="mb-4 flex justify-start">
-            <Link to='/'>
-              <FaArrowLeft size={25} />
-            </Link>
-          </div>
+      <div className="mb-4 flex justify-start">
+        <Link to='/'>
+          <FaArrowLeft size={25} />
+        </Link>
+      </div>
       <div className="flex-1 flex items-center justify-center bg-white py-2">
-        
         <div className="w-full max-w-md px-4 py-6 rounded-md shadow-lg">
           <div>
             <h1 className="py-4 text-[#131a4b] text-3xl font-bold text-center">Log In</h1>

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { auth, db, googleAuthProvider } from '../../../firebase';
 import backtruck from '../DriverAssets/truck4.jpg';
 import { FaArrowLeft } from "react-icons/fa";
-import { Link, useNavigate } from 'react-router-dom';
 
 const SignUpFormDriver = () => {
   const [formData, setFormData] = useState({
@@ -39,12 +40,56 @@ const SignUpFormDriver = () => {
     e.preventDefault();
     const formErrors = validateForm();
     if (Object.keys(formErrors).length === 0) {
-      console.log('Form data:', formData);
-      // Submit form data
-      navigate('/DriverHome'); // Redirect to DriverHome after successful submission
+      auth.createUserWithEmailAndPassword(formData.email, formData.password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+          
+          // Create a new document in Firestore with the driver's UID
+          db.collection('driversDetails').doc(user.uid).set({
+            firstName: formData.firstName,
+            surname: formData.surname,
+            phoneNumber: formData.phoneNumber,
+            email: formData.email
+          }).then(() => {
+            console.log("Driver information saved to Firestore");
+            navigate('/DriverHome'); // Redirect to DriverHome after successful submission
+          }).catch(error => {
+            console.error("Error adding driver information to Firestore: ", error);
+            alert("There was an error saving your information. Please try again.");
+          });
+        })
+        .catch(error => {
+          console.error("Error creating account: ", error);
+          alert("There was an error creating your account. Please try again.");
+        });
     } else {
       setErrors(formErrors);
     }
+  };
+
+  const signInWithGoogle = () => {
+    auth.signInWithPopup(googleAuthProvider)
+      .then((result) => {
+        const user = result.user;
+        
+        // Create a new document in Firestore with the driver's UID
+        db.collection('driversDetails').doc(user.uid).set({
+          firstName: user.displayName.split(' ')[0],
+          surname: user.displayName.split(' ')[1] || '',
+          phoneNumber: '', // You may want to add a method to collect this later
+          email: user.email
+        }).then(() => {
+          console.log("Driver information saved to Firestore");
+          navigate('/DriverHome');
+        }).catch(error => {
+          console.error("Error adding driver information to Firestore: ", error);
+          alert("There was an error saving your information. Please try again.");
+        });
+      })
+      .catch((error) => {
+        console.error("Error signing in with Google: ", error);
+        alert("There was an error signing in with Google. Please try again.");
+      });
   };
 
   return (
@@ -56,10 +101,16 @@ const SignUpFormDriver = () => {
             <FaArrowLeft size={25} />
           </Link>
         </div>
-        <div className=" px-4 py-4 rounded-md shadow-lg w-full h-screen max-w-md mx-auto flex-1">
+        <div className="px-4 py-4 rounded-md shadow-lg w-full h-screen max-w-md mx-auto flex-1">
           <div>
             <h1 className="py-4 text-[#131a4b] text-3xl font-bold text-center">Create an Account</h1>
           </div>
+          <button
+            className="bg-blue-800 px-4 rounded-md text-white font-bold py-2 mb-4"
+            onClick={signInWithGoogle}
+          >
+            Sign up with Google
+          </button>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <label className="font-medium text-gray-500">Name(s)</label>
@@ -140,12 +191,11 @@ const SignUpFormDriver = () => {
               </button>
             </div>
             <label className='px-2'>
-                Already have an account?  
-                <Link to='/LogInFormDriver' className='hover:text-amber-500 px-2 text-[#131a4b] font-semibold'>
+              Already have an account?  
+              <Link to='/LogInFormDriver' className='hover:text-amber-500 px-2 text-[#131a4b] font-semibold'>
                 Log In
-                </Link>
-              </label>
-
+              </Link>
+            </label>
           </form>
         </div>
       </div>

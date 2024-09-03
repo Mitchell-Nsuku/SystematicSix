@@ -6,9 +6,55 @@ import WhyMove from './WhyMove';
 import { FaSquareInstagram } from "react-icons/fa6";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaFacebook } from "react-icons/fa";
+import ChatBot from 'react-simple-chatbot';
+
 
 const Home = () => {
-  // Debugging: Log the imported image path to check if it's correct
+// chatbot code
+
+const steps = [
+  {
+    id: '1',
+    message: 'What is your name?',
+    trigger: '2',
+  },
+  {
+    id: '2',
+    user: true,
+    trigger: '3',
+  },
+  {
+    id: '3',
+    message: 'Hi {previousValue}, nice to meet you!',
+    trigger: '4',
+  },
+  {
+    id: '4',
+    message: 'What number am I thinking?',
+    trigger: '5', // Change this to trigger the next step
+  },
+  {
+    id: '5',
+    options: [
+      { value: 1, label: 'Number 1', trigger: '7' },
+      { value: 2, label: 'Number 2', trigger: '6' },
+      { value: 3, label: 'Number 3', trigger: '6' },
+    ],
+  },
+  {
+    id: '6',
+    message: 'Wrong answer, try again.',
+    trigger: '5',
+  },
+  {
+    id: '7',
+    message: 'Awesome! You are a telepath!',
+    end: true,
+  },
+];
+
+// ends here
+
   console.log("Image path:", backtruck);
 
   return (
@@ -92,6 +138,11 @@ const Home = () => {
           </div>
         </div>
       </footer>
+      <ChatBot 
+            steps={steps}
+            floating={true}
+            botDelay={1000}
+          />
     </div>
   );
 };
