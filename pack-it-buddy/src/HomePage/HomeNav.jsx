@@ -9,7 +9,8 @@ const HomeNav = () => {
   const toggleNav = () => setNav(!nav);
 
   return (
-<nav className="flex justify-between items-center w-full h-20 px-4 text-white bg-white shadow-lg">
+<nav className="flex justify-between items-center w-full h-20 px-4 bg-white shadow-lg">
+  {/* Logo Section */}
   <div>
     <Link to="/">
       <img
@@ -20,6 +21,7 @@ const HomeNav = () => {
     </Link>
   </div>
 
+  {/* Desktop Menu */}
   <ul className="hidden md:flex">
     <li>
       <Link
@@ -70,13 +72,13 @@ const HomeNav = () => {
     </li>
 
     <label className="nav-item text-white">
-      <Link className='bg-[#131a4b] font-bold px-4 rounded-md py-2' to='/SignUpFormClient'>
+      <Link className='bg-[#131a4b] font-bold px-4 py-2 rounded-md hover:bg-blue-700 duration-200' to='/SignUpFormClient'>
         Sign In
       </Link>
     </label>
   </ul>
 
-  {/* Hamburger Menu Icon */}
+  {/* Mobile Hamburger Icon */}
   <div
     onClick={toggleNav}
     className="cursor-pointer pr-4 z-20 text-gray-500 md:hidden"
@@ -87,39 +89,30 @@ const HomeNav = () => {
 
   {/* Mobile Menu */}
   <div
-    className={`fixed top-2 left-0 w-full h-fit bg-white text-gray-500 z-50 flex flex-col items-center justify-center transition-all duration-300 ease-in-out ${
-      nav ? "left-0" : "-left-full"
-    }`}
+    className={`fixed top-20 left-0 w-full bg-white text-gray-500 z-50 flex flex-col items-center transition-transform duration-300 md:hidden ${nav ? 'translate-x-0' : '-translate-x-full'}`}
   >
-    <div
-      onClick={toggleNav}
-      className="absolute top-4 right-4 cursor-pointer text-gray-500"
-      aria-label="Close navigation menu"
-    >
-      <FaTimes size={30} />
-    </div>
-
-    <ul className="flex flex-col items-center gap-6">
-      <li className="text-2xl font-bold py-2 active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] hover:text-[#131a4b] hover:underline">
+    <ul className="flex flex-col items-center w-full text-center gap-4 py-8">
+      <li className="px-4 hover:text-[#131a4b] cursor-pointer capitalize py-2 text-lg">
         <Link onClick={toggleNav} to="/SignUpFormDriver">Become a driver</Link>
       </li>
-      <li className="text-2xl font-bold py-2 active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] hover:text-[#131a4b] hover:underline">
+      <li className="px-4 hover:text-[#131a4b] cursor-pointer capitalize py-2 text-lg">
         <Link onClick={toggleNav} to="/Reviews">Services</Link>
       </li>
-      <li className="text-2xl font-bold py-2 active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] hover:text-[#131a4b] hover:underline">
+      <li className="px-4 hover:text-[#131a4b] cursor-pointer capitalize py-2 text-lg">
         <Link onClick={toggleNav} to="/SupportPage">About</Link>
       </li>
-      <li className="text-2xl font-bold py-2 active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] hover:text-[#131a4b] hover:underline">
+      <li className="px-4 hover:text-[#131a4b] cursor-pointer capitalize py-2 text-lg">
         <Link onClick={toggleNav} to="/Deals">Contacts</Link>
       </li>
-      <li className="text-2xl font-bold py-2 active:scale-[.98] active:duration-75 transition-all hover:scale-[1.01] hover:underline">
-        <Link className="bg-[#131a4b] text-white px-4 rounded-md py-2" onClick={toggleNav} to='/SignUpFormClient'>
+      <label className="w-full">
+        <Link className='bg-[#131a4b] font-bold px-4 py-2 rounded-md text-white w-auto' to='/SignUpFormClient'>
           Sign In
         </Link>
-      </li>
+      </label>
     </ul>
   </div>
 </nav>
+
 
   );
 };

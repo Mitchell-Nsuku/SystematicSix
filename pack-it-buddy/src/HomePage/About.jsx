@@ -1,7 +1,7 @@
 import React from 'react'
 import Navbar from './HomeNav';
 import backtruck from '../assets/BackgroundImg/truck4.jpg';
-import truck from '../assets/BackgroundImg/about2.jpg';
+import truck from '../assets/BackgroundImg/about3.jpg';
 import Footer from './Footer';
 
 
@@ -37,7 +37,7 @@ function About() {
 
 <h2 className='text-xl font-bold ml-8 mb-0 mt-8'>About Us</h2>
 <div className='flex flex-col md:flex-row m-8 ml-1 mt-5 mr-0 p-5 shadow-md active:scale-[.98] active:duration-75 transition-all'>
-    <div className='w-full md:w-3/5'>
+    <div className='w-full'>
         <p className='h-full'>At PackitBuddy, we make moving easy and stress-free. 
             Whether you're relocating your office, moving into a new home, 
             or transporting goods for your business, we offer a reliable 
@@ -51,7 +51,7 @@ function About() {
 
 <h2 className='text-xl font-bold ml-8 mb-0'>Why Choose Us</h2>
 <div className='flex flex-col md:flex-row m-1 mt-5 mb-10 p-5 shadow-md active:scale-[.98] active:duration-75 transition-all'>
-    <img src={backtruck} className='w-full md:w-2/5 h-40 mr-5 mb-5 md:mb-0'></img>
+    <img src={truck} className='w-full md:w-2/5 h-40 mr-5 mb-5 md:mb-0'></img>
     <div className='w-full'>
         <ul className="pl-5 mr-0">
             <li><strong>Convenience:</strong> Book a move anytime, anywhere with our easy-to-use app.</li>
