@@ -19,7 +19,8 @@ import Varification from './DriverPages/Varification';
 import DriverReferrals from './DriverPages/DriverReferrals';
 import DriverProfile from './DriverPages/DriverComponents/DriverProfile';
 import ClientProfile from './ClientPages/ClientComponents/ClientProfile';
-import AboutPage from './HomePage/About'
+import AboutPage from './HomePage/About';
+import BusinessMove from './HomePage/ServircesPages/BusinessMove';
 
 function App() {
 
@@ -47,6 +48,7 @@ function App() {
         <Route path='/DriverProfile' element={<DriverProfile />} />
         <Route path='/ClientProfile' element={<ClientProfile />} />
         <Route path='/About' element={<AboutPage />} />
+        <Route path='BusinessMove' element={<BusinessMove/>} />
         
       </Routes>
 

@@ -38,24 +38,22 @@ const HomeNav = () => {
       >
         Services
       </Link>
-      <ul className="absolute left-0 mt-2 w-48 bg-white text-gray-700 opacity-0 group-hover:opacity-100 group-hover:block hidden transition-opacity duration-200">
-        <li className="px-4 py-2 hover:bg-gray-200 shadow-sm">Local Moving</li>
-        <li className="px-4 py-2 hover:bg-gray-200 shadow-sm">International Moving</li>
-        <li className="px-4 py-2 hover:bg-gray-200 shadow-sm">Packing Services</li>
+      <ul className="absolute left-0 top-full w-48 bg-white text-gray-700 opacity-0 group-hover:opacity-100 group-hover:block hidden transition-opacity duration-200 z-50">
+        <li className="px-4 py-2 hover:bg-gray-200 shadow-sm cursor-pointer">Local Moving</li>
+        <li className="px-4 py-2 hover:bg-gray-200 shadow-sm cursor-pointer"> <Link to='/BusinessMove'>Business Move</Link> </li>
+        <li className="px-4 py-2 hover:bg-gray-200 shadow-sm cursor-pointer">Packing Services</li>
       </ul>
-    </li>
+</li>
+
 
     <li className="relative group">
       <Link
         className="px-4 cursor-pointer capitalize font-bold text-gray-800 hover:scale-105 duration-200"
-        to="/"
+        to="/About"
       >
         About
       </Link>
-      <ul className="absolute left-0 mt-2 w-48 bg-white text-gray-700 opacity-0 group-hover:opacity-100 group-hover:block hidden transition-opacity duration-200">
-        <li className="px-4 py-2 hover:bg-gray-200 shadow-sm">Our Story</li>
-        <li className="px-4 py-2 hover:bg-gray-200 shadow-sm">Team</li>
-      </ul>
+      
     </li>
 
     <li className="relative group">
@@ -65,11 +63,11 @@ const HomeNav = () => {
       >
         Contact
       </Link>
-      <ul className="absolute left-0 mt-2 w-48 bg-white text-gray-700 opacity-0 group-hover:opacity-100 group-hover:block hidden transition-opacity duration-200">
-        <li className="px-4 py-2 hover:bg-gray-200 shadow-sm">Location</li>
-        <li className="px-4 py-2 hover:bg-gray-200 shadow-sm">Support</li>
+      <ul className="absolute left-0 top-full w-48 bg-white text-gray-700 opacity-0 group-hover:opacity-100 group-hover:block hidden transition-opacity duration-200 z-50">
+        <li className="px-4 py-2 hover:bg-gray-200 shadow-sm cursor-pointer">Location</li>
+        <li className="px-4 py-2 hover:bg-gray-200 shadow-sm cursor-pointer">Support</li>
       </ul>
-    </li>
+</li>
 
     <label className="nav-item text-white">
       <Link className='bg-[#131a4b] font-bold px-4 py-2 rounded-md hover:bg-blue-700 duration-200' to='/SignUpFormClient'>
