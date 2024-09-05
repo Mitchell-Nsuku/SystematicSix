@@ -19,6 +19,7 @@ import Varification from './DriverPages/Varification';
 import DriverReferrals from './DriverPages/DriverReferrals';
 import DriverProfile from './DriverPages/DriverComponents/DriverProfile';
 import ClientProfile from './ClientPages/ClientComponents/ClientProfile';
+import AboutPage from './HomePage/About'
 
 function App() {
 
@@ -45,6 +46,7 @@ function App() {
         <Route path='/DriverReferrals' element={<DriverReferrals />} />
         <Route path='/DriverProfile' element={<DriverProfile />} />
         <Route path='/ClientProfile' element={<ClientProfile />} />
+        <Route path='/About' element={<AboutPage />} />
         
       </Routes>
 
