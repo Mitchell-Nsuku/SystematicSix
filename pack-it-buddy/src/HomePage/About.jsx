@@ -1,4 +1,3 @@
-import React from 'react'
 import Navbar from './HomeNav';
 import backtruck from '../assets/BackgroundImg/truck4.jpg';
 import truck from '../assets/BackgroundImg/about3.jpg';
@@ -39,7 +38,7 @@ function About() {
 <div className='flex flex-col md:flex-row m-8 ml-1 mt-5 mr-0 p-5 shadow-md active:scale-[.98] active:duration-75 transition-all'>
     <div className='w-full'>
         <p className='h-full'>At PackitBuddy, we make moving easy and stress-free. 
-            Whether you're relocating your office, moving into a new home, 
+            Whether you’re  relocating your office, moving into a new home, 
             or transporting goods for your business, we offer a reliable 
             and efficient service to get your belongings where they need to go—anywhere in South Africa.
             Our service operates similarly to popular ride-hailing apps like Uber and Bolt, 
@@ -57,7 +56,7 @@ function About() {
             <li><strong>Convenience:</strong> Book a move anytime, anywhere with our easy-to-use app.</li>
             <li><strong>Reliability:</strong> Our professional drivers ensure your items are transported safely and securely.</li>
             <li><strong>Flexibility:</strong> Whether you’re moving a few items or an entire building, we’ve got you covered with our range of truck sizes.</li>
-            <li><strong>Nationwide Coverage:</strong> We operate across South Africa, so no matter where you're going, we can help you get there.</li>
+            <li><strong>Nationwide Coverage:</strong> We operate across South Africa, so no matter where you’re  going, we can help you get there.</li>
             <li><strong>Affordable Rates:</strong> Enjoy competitive pricing and clear, upfront costs with no hidden fees.</li>
         </ul>
     </div>
