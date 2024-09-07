@@ -1,8 +1,10 @@
-import React from 'react'
-import DriverNav from './DriverComponents/DriverNav'
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import DriverNav from './DriverComponents/DriverNav';
 import { useNavigate } from 'react-router-dom';
 import { RiLogoutCircleRLine } from "react-icons/ri";
+import { auth, db } from '../../firebase'; // Import Firestore and authentication
+import firebase from 'firebase/app'; // Import firebase if not already
+
 const DriverHome = () => {
   const [rideDetails, setRideDetails] = useState(null);
   const [rideAccepted, setRideAccepted] = useState(false);
@@ -16,13 +18,14 @@ const DriverHome = () => {
       const movingDate = localStorage.getItem('movingDate'); // Retrieve the moving date
 
       if (totalPrice) {
-          latestTrip.price = totalPrice; // Ensure the price matches the one from GetQuote
+        latestTrip.price = totalPrice; // Ensure the price matches the one from GetQuote
       }
       if (movingDate) {
-          latestTrip.movingDate = movingDate; // Set the moving date from localStorage
+        latestTrip.movingDate = movingDate; // Set the moving date from localStorage
       }
       setRideDetails(latestTrip);
-  }
+    }
+
     const initMap = () => {
       const johannesburg = { lat: -26.2033, lng: 28.0473 };
       const pretoria = { lat: -25.7461, lng: 28.1881 };
@@ -74,11 +77,26 @@ const DriverHome = () => {
       console.error('No ride details available');
       return;
     }
-// Redirect to Google Maps directions
+
+    // Redirect to Google Maps directions
     const directionsUrl = `https://www.google.com/maps/dir/?api=1&origin=${encodeURIComponent(rideDetails.source)}&destination=${encodeURIComponent(rideDetails.destination)}`;
     window.location.href = directionsUrl;
 
     setRideAccepted(true);
+
+    // Save accepted ride to Firestore
+    const user = auth.currentUser;
+    if (user) {
+      const userRef = db.collection('users').doc(user.uid);
+
+      userRef.update({
+        tripHistory: firebase.firestore.FieldValue.arrayUnion(rideDetails)
+      }).then(() => {
+        console.log("Ride details added to user's trip history in Firestore");
+      }).catch(error => {
+        console.error("Error adding ride details to Firestore: ", error);
+      });
+    }
 
     // Save accepted ride to localStorage
     const acceptedRides = JSON.parse(localStorage.getItem('acceptedRides')) || [];
@@ -87,10 +105,12 @@ const DriverHome = () => {
 
     localStorage.removeItem('rideHistory');
   };
+
   return (
     <div className='bg-gray-50'>
       <DriverNav />
       <div className='px-4 py-2'>
+        {/* Optional logout button */}
       </div>
 
       <main className="flex flex-col items-center min-h-screen p-5 w-screen">
@@ -132,7 +152,7 @@ const DriverHome = () => {
         </div>
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default DriverHome
+export default DriverHome;

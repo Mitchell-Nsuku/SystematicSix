@@ -1,4 +1,3 @@
-import React from 'react'
 import firstpic from '../assets/BackgroundImg/local.jpg'
 import SecPic from '../assets/BackgroundImg/long.jpg'
 import ThirdPic from '../assets/BackgroundImg/business.jpg'
